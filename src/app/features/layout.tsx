@@ -6,6 +6,6 @@ export const metadata: Metadata = {
     "Explore every CopilotKit feature used in AgenticUI: from useCopilotReadable to Generative UI, multi-adapter runtime, and AI-powered text editing.",
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
   return children;
 }

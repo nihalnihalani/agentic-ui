@@ -681,11 +681,11 @@ function ArchitectureDiagram() {
 export default function FeaturesPage() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <Header />
+      <Header transparent />
 
       <main className="flex-1">
         {/* ── Hero ── */}
-        <section className="relative overflow-hidden border-b border-border/40">
+        <section className="relative -mt-16 overflow-hidden border-b border-border/40">
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute -top-40 left-1/2 size-[600px] -translate-x-1/2 rounded-full bg-violet-500/10 blur-[120px]" />
             <div className="absolute -top-20 left-1/4 size-[400px] rounded-full bg-blue-500/10 blur-[100px]" />
