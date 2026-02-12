@@ -17,6 +17,7 @@ import { ComponentPageHeader } from "@/components/layout/component-page-header";
 import { getComponentBySlug } from "@/lib/components-data";
 import { CodeBlock } from "@/components/layout/code-block";
 import { ComponentNav } from "@/components/layout/component-nav";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 
 const demoColumns: Column[] = [
@@ -120,26 +121,29 @@ export default function CopilotCanvasPage() {
           <ComponentPageHeader component={getComponentBySlug("copilot-canvas")!} />
 
           {/* Live demo */}
-          <Card className="mb-8 border-border/50 bg-card/30">
-            <CardHeader>
-              <CardTitle className="text-lg">Live Demo</CardTitle>
-              <CardDescription>
-                Drag cards between columns or use the AI chat to manage the
-                board. Try saying &quot;Move the auth task to Done&quot; or
-                &quot;Add a new high priority task to Todo&quot;.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="rounded-lg border border-border/30 bg-background/50 overflow-hidden">
-                <CopilotCanvas
-                  initialColumns={demoColumns}
-                  onUpdate={(cols) =>
-                    console.log("Board updated:", cols)
-                  }
-                />
-              </div>
-            </CardContent>
-          </Card>
+          <div className="relative mb-8 rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50 bg-card/30">
+              <CardHeader>
+                <CardTitle className="text-lg">Live Demo</CardTitle>
+                <CardDescription>
+                  Drag cards between columns or use the AI chat to manage the
+                  board. Try saying &quot;Move the auth task to Done&quot; or
+                  &quot;Add a new high priority task to Todo&quot;.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="rounded-lg border border-border/30 bg-background/50 overflow-hidden">
+                  <CopilotCanvas
+                    initialColumns={demoColumns}
+                    onUpdate={(cols) =>
+                      console.log("Board updated:", cols)
+                    }
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Try these prompts */}
           <div className="mb-8">
@@ -154,18 +158,21 @@ export default function CopilotCanvasPage() {
           </div>
 
           {/* Code snippet */}
-          <Card className="border-border/50 bg-card/30">
-            <CardHeader>
-              <CardTitle className="text-lg">Usage</CardTitle>
-              <CardDescription>
-                Drop the component into your project and provide initial column
-                data. CopilotKit actions are registered automatically.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CodeBlock code={codeSnippet} filename="usage.tsx" />
-            </CardContent>
-          </Card>
+          <div className="relative rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50 bg-card/30">
+              <CardHeader>
+                <CardTitle className="text-lg">Usage</CardTitle>
+                <CardDescription>
+                  Drop the component into your project and provide initial column
+                  data. CopilotKit actions are registered automatically.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CodeBlock code={codeSnippet} filename="usage.tsx" />
+              </CardContent>
+            </Card>
+          </div>
 
           <ComponentNav currentSlug="copilot-canvas" />
         </div>

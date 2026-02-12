@@ -14,6 +14,7 @@ import { ComponentPageHeader } from "@/components/layout/component-page-header";
 import { getComponentBySlug } from "@/lib/components-data";
 import { CodeBlock } from "@/components/layout/code-block";
 import { ComponentNav } from "@/components/layout/component-nav";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 
 const codeSnippet = `import { CopilotChat } from "@/components/registry/copilot-chat";
@@ -49,18 +50,21 @@ export default function CopilotChatPage() {
           <ComponentPageHeader component={component} />
 
           {/* Live Demo */}
-          <Card className="mb-8 border-border/50">
-            <CardHeader>
-              <CardTitle>Live Demo</CardTitle>
-              <CardDescription>
-                A custom chat interface with AI-powered message management. Use
-                the CopilotPopup to search, summarize, or manage messages.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CopilotChat />
-            </CardContent>
-          </Card>
+          <div className="relative mb-8 rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50">
+              <CardHeader>
+                <CardTitle>Live Demo</CardTitle>
+                <CardDescription>
+                  A custom chat interface with AI-powered message management. Use
+                  the CopilotPopup to search, summarize, or manage messages.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CopilotChat />
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Try these prompts */}
           <div className="mb-8">
@@ -85,18 +89,21 @@ export default function CopilotChatPage() {
           </div>
 
           {/* Usage */}
-          <Card className="border-border/50">
-            <CardHeader>
-              <CardTitle>Usage</CardTitle>
-              <CardDescription>
-                Add CopilotChat to your project for a branded chat experience
-                with AI message management.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CodeBlock code={codeSnippet} filename="usage.tsx" />
-            </CardContent>
-          </Card>
+          <div className="relative rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50">
+              <CardHeader>
+                <CardTitle>Usage</CardTitle>
+                <CardDescription>
+                  Add CopilotChat to your project for a branded chat experience
+                  with AI message management.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CodeBlock code={codeSnippet} filename="usage.tsx" />
+              </CardContent>
+            </Card>
+          </div>
 
           <ComponentNav currentSlug="copilot-chat" />
         </div>

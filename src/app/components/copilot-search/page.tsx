@@ -14,6 +14,7 @@ import { ComponentPageHeader } from "@/components/layout/component-page-header";
 import { getComponentBySlug } from "@/lib/components-data";
 import { CodeBlock } from "@/components/layout/code-block";
 import { ComponentNav } from "@/components/layout/component-nav";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 
 const codeSnippet = `import { CopilotSearch } from "@/components/registry/copilot-search";
@@ -57,19 +58,22 @@ export default function CopilotSearchPage() {
           <ComponentPageHeader component={component} />
 
           {/* Live Demo */}
-          <Card className="mb-8 border-border/50">
-            <CardHeader>
-              <CardTitle>Live Demo</CardTitle>
-              <CardDescription>
-                An AI-powered search interface. Use the search bar directly or
-                open the chat to search, filter, sort, and highlight results
-                using natural language.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CopilotSearch />
-            </CardContent>
-          </Card>
+          <div className="relative mb-8 rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50">
+              <CardHeader>
+                <CardTitle>Live Demo</CardTitle>
+                <CardDescription>
+                  An AI-powered search interface. Use the search bar directly or
+                  open the chat to search, filter, sort, and highlight results
+                  using natural language.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CopilotSearch />
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Try these prompts */}
           <div className="mb-8">
@@ -94,18 +98,21 @@ export default function CopilotSearchPage() {
           </div>
 
           {/* Usage */}
-          <Card className="border-border/50">
-            <CardHeader>
-              <CardTitle>Usage</CardTitle>
-              <CardDescription>
-                Drop the search interface into your project. Pass a custom
-                product catalog or use the built-in sample data.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CodeBlock code={codeSnippet} filename="usage.tsx" />
-            </CardContent>
-          </Card>
+          <div className="relative rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50">
+              <CardHeader>
+                <CardTitle>Usage</CardTitle>
+                <CardDescription>
+                  Drop the search interface into your project. Pass a custom
+                  product catalog or use the built-in sample data.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CodeBlock code={codeSnippet} filename="usage.tsx" />
+              </CardContent>
+            </Card>
+          </div>
 
           <ComponentNav currentSlug="copilot-search" />
         </div>

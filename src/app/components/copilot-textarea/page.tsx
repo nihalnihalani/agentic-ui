@@ -15,6 +15,7 @@ import { ComponentPageHeader } from "@/components/layout/component-page-header";
 import { getComponentBySlug } from "@/lib/components-data";
 import { CodeBlock } from "@/components/layout/code-block";
 import { ComponentNav } from "@/components/layout/component-nav";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 import { cn } from "@/lib/utils";
 
@@ -105,7 +106,9 @@ export default function CopilotTextareaPage() {
           />
 
           {/* Live Demo */}
-          <Card className="mb-8 border-border/50">
+          <div className="relative mb-8 rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50">
             <CardHeader>
               <CardTitle>Live Demo - AI Writing Assistant</CardTitle>
               <CardDescription>
@@ -125,6 +128,7 @@ export default function CopilotTextareaPage() {
               <TextareaDemo />
             </CardContent>
           </Card>
+          </div>
 
           {/* Try these prompts */}
           <div className="mb-8">
@@ -149,18 +153,21 @@ export default function CopilotTextareaPage() {
           </div>
 
           {/* Code Snippet */}
-          <Card className="border-border/50">
-            <CardHeader>
-              <CardTitle>Usage</CardTitle>
-              <CardDescription>
-                Add CopilotTextEditor to your project with a custom purpose for
-                AI-powered writing assistance.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CodeBlock code={codeSnippet} filename="usage.tsx" />
-            </CardContent>
-          </Card>
+          <div className="relative rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50">
+              <CardHeader>
+                <CardTitle>Usage</CardTitle>
+                <CardDescription>
+                  Add CopilotTextEditor to your project with a custom purpose for
+                  AI-powered writing assistance.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CodeBlock code={codeSnippet} filename="usage.tsx" />
+              </CardContent>
+            </Card>
+          </div>
 
           <ComponentNav currentSlug="copilot-textarea" />
         </div>

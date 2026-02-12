@@ -14,6 +14,7 @@ import { ComponentPageHeader } from "@/components/layout/component-page-header";
 import { getComponentBySlug } from "@/lib/components-data";
 import { CodeBlock } from "@/components/layout/code-block";
 import { ComponentNav } from "@/components/layout/component-nav";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 
 const codeSnippet = `import { CopilotEditor } from "@/components/registry/copilot-editor";
@@ -46,18 +47,21 @@ export default function CopilotEditorPage() {
           <ComponentPageHeader component={component} />
 
           {/* Live Demo */}
-          <Card className="mb-8 border-border/50">
-            <CardHeader>
-              <CardTitle>Live Demo</CardTitle>
-              <CardDescription>
-                A markdown editor with AI writing assistance. Edit directly or
-                open the chat to insert, replace, format, and improve text.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CopilotEditor />
-            </CardContent>
-          </Card>
+          <div className="relative mb-8 rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50">
+              <CardHeader>
+                <CardTitle>Live Demo</CardTitle>
+                <CardDescription>
+                  A markdown editor with AI writing assistance. Edit directly or
+                  open the chat to insert, replace, format, and improve text.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CopilotEditor />
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Try these prompts */}
           <div className="mb-8">
@@ -82,17 +86,20 @@ export default function CopilotEditorPage() {
           </div>
 
           {/* Usage */}
-          <Card className="border-border/50">
-            <CardHeader>
-              <CardTitle>Usage</CardTitle>
-              <CardDescription>
-                Add the editor to your project with optional initial content.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CodeBlock code={codeSnippet} filename="usage.tsx" />
-            </CardContent>
-          </Card>
+          <div className="relative rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50">
+              <CardHeader>
+                <CardTitle>Usage</CardTitle>
+                <CardDescription>
+                  Add the editor to your project with optional initial content.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CodeBlock code={codeSnippet} filename="usage.tsx" />
+              </CardContent>
+            </Card>
+          </div>
 
           <ComponentNav currentSlug="copilot-editor" />
         </div>

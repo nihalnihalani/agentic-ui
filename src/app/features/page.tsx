@@ -17,10 +17,14 @@ import {
   ArrowRight,
   Github,
   ExternalLink,
+  Monitor,
+  ServerIcon,
+  Wifi,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -195,24 +199,484 @@ const stats = [
   { label: "Design System", value: "shadcn/ui" },
 ];
 
-const architectureDiagram = `Browser                              Server
-┌────────────────────────────┐  ┌────────────────────────┐
-│  CopilotKit Provider       │  │  CopilotRuntime         │
-│  ├─ CopilotSidebar         │──▶ ├─ OpenAIAdapter        │
-│  ├─ CopilotPopup           │  │  ├─ AnthropicAdapter    │
-│  └─ CopilotTextarea        │  │  ├─ GroqAdapter         │
-│                            │  │  └─ GoogleGenAIAdapter  │
-│  Hooks:                    │  │                        │
-│  ├─ useCopilotReadable     │  │  /api/copilotkit        │
-│  │   (component state → AI)│  └────────────────────────┘
-│  ├─ useCopilotAction       │
-│  │   (AI → component state)│
-│  └─ useCopilotChatSuggestions
-│                            │
-│  Generative UI:            │
-│  └─ render() on actions    │
-│     (rich React in chat)   │
-└────────────────────────────┘`;
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+};
+
+const staggerItem = {
+  hidden: { opacity: 0, y: 12, scale: 0.97 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
+
+const columnReveal = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
+
+const columnRevealRight = {
+  hidden: { opacity: 0, x: 30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const, delay: 0.2 },
+  },
+};
+
+function DataFlowParticles() {
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {[0, 1, 2].map((i) => (
+        <motion.div
+          key={i}
+          className="absolute left-1/2 size-1.5 rounded-full bg-violet-400/80"
+          style={{ top: `${25 + i * 25}%` }}
+          animate={{
+            x: [-20, 20],
+            opacity: [0, 1, 1, 0],
+            scale: [0.5, 1, 1, 0.5],
+          }}
+          transition={{
+            duration: 2,
+            delay: i * 0.6,
+            repeat: Infinity,
+            repeatDelay: 1,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+      {[0, 1].map((i) => (
+        <motion.div
+          key={`return-${i}`}
+          className="absolute left-1/2 size-1 rounded-full bg-cyan-400/60"
+          style={{ top: `${35 + i * 25}%` }}
+          animate={{
+            x: [20, -20],
+            opacity: [0, 0.8, 0.8, 0],
+            scale: [0.5, 1, 1, 0.5],
+          }}
+          transition={{
+            duration: 2.5,
+            delay: 1 + i * 0.8,
+            repeat: Infinity,
+            repeatDelay: 1.5,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function ArchitectureDiagram() {
+  return (
+    <div className="relative">
+      {/* Subtle background grid */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-2xl opacity-[0.03]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(139,92,246,0.3) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
+      />
+
+      <div className="grid gap-4 md:grid-cols-[1fr_80px_1fr] md:gap-0">
+        {/* Browser Column */}
+        <motion.div
+          className="relative rounded-2xl border border-border/40 bg-gradient-to-b from-violet-500/[0.03] to-transparent p-1"
+          variants={columnReveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <GlowingEffect
+            spread={40}
+            glow={true}
+            disabled={false}
+            proximity={64}
+            inactiveZone={0.01}
+            borderWidth={2}
+          />
+          <div className="relative rounded-xl bg-background/80 backdrop-blur-sm p-5">
+            {/* Header */}
+            <div className="mb-5 flex items-center gap-3">
+              <motion.div
+                className="flex size-9 items-center justify-center rounded-lg bg-violet-500/10 ring-1 ring-violet-500/20"
+                whileHover={{ scale: 1.1, rotate: -5 }}
+                transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              >
+                <Monitor className="size-4 text-violet-400" />
+              </motion.div>
+              <div>
+                <h3 className="font-mono text-sm font-semibold text-foreground">
+                  Browser
+                </h3>
+                <p className="font-mono text-[10px] text-muted-foreground/50">
+                  Client-side
+                </p>
+              </div>
+              <motion.div
+                className="ml-auto flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2 py-0.5 ring-1 ring-emerald-500/20"
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <div className="size-1.5 rounded-full bg-emerald-400" />
+                <span className="font-mono text-[9px] text-emerald-400">
+                  CONNECTED
+                </span>
+              </motion.div>
+            </div>
+
+            {/* Provider Section */}
+            <motion.div
+              className="mb-3 rounded-lg border border-violet-500/15 bg-violet-500/[0.03] p-3"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="mb-2.5 flex items-center gap-2">
+                <div className="size-1 rounded-full bg-violet-400 shadow-[0_0_6px_rgba(139,92,246,0.6)]" />
+                <p className="font-mono text-[11px] font-semibold text-violet-400">
+                  CopilotKit Provider
+                </p>
+              </div>
+              <div className="space-y-1.5">
+                {[
+                  { name: "CopilotSidebar", icon: PanelRight },
+                  { name: "CopilotPopup", icon: MessageCircle },
+                  { name: "CopilotTextarea", icon: PenTool },
+                ].map((item) => (
+                  <motion.div
+                    key={item.name}
+                    className="group/item flex items-center gap-2.5 rounded-md border border-border/20 bg-background/60 px-2.5 py-2 transition-all hover:border-violet-500/30 hover:bg-violet-500/[0.04]"
+                    variants={staggerItem}
+                    whileHover={{ x: 4 }}
+                  >
+                    <item.icon className="size-3 text-violet-400/50 transition-colors group-hover/item:text-violet-400" />
+                    <span className="font-mono text-xs text-muted-foreground transition-colors group-hover/item:text-foreground">
+                      {item.name}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Hooks Section */}
+            <motion.div
+              className="mb-3 rounded-lg border border-blue-500/15 bg-blue-500/[0.03] p-3"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="mb-2.5 flex items-center gap-2">
+                <div className="size-1 rounded-full bg-blue-400 shadow-[0_0_6px_rgba(96,165,250,0.6)]" />
+                <p className="font-mono text-[11px] font-semibold text-blue-400">
+                  Hooks
+                </p>
+              </div>
+              <div className="space-y-1.5">
+                {[
+                  {
+                    name: "useCopilotReadable",
+                    desc: "component state → AI",
+                    icon: Eye,
+                  },
+                  {
+                    name: "useCopilotAction",
+                    desc: "AI → component state",
+                    icon: Zap,
+                  },
+                  {
+                    name: "useCopilotChatSuggestions",
+                    desc: null,
+                    icon: MessageSquare,
+                  },
+                ].map((hook) => (
+                  <motion.div
+                    key={hook.name}
+                    className="group/item rounded-md border border-border/20 bg-background/60 px-2.5 py-2 transition-all hover:border-blue-500/30 hover:bg-blue-500/[0.04]"
+                    variants={staggerItem}
+                    whileHover={{ x: 4 }}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <hook.icon className="size-3 text-blue-400/50 transition-colors group-hover/item:text-blue-400" />
+                      <span className="font-mono text-xs text-muted-foreground transition-colors group-hover/item:text-foreground">
+                        {hook.name}
+                      </span>
+                    </div>
+                    {hook.desc && (
+                      <div className="mt-1 ml-5.5 flex items-center gap-1.5">
+                        <div className="h-px w-3 bg-blue-400/20" />
+                        <p className="font-mono text-[10px] text-muted-foreground/40">
+                          {hook.desc}
+                        </p>
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Generative UI Section */}
+            <motion.div
+              className="rounded-lg border border-cyan-500/15 bg-cyan-500/[0.03] p-3"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="mb-2.5 flex items-center gap-2">
+                <div className="size-1 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(34,211,238,0.6)]" />
+                <p className="font-mono text-[11px] font-semibold text-cyan-400">
+                  Generative UI
+                </p>
+              </div>
+              <motion.div
+                className="group/item rounded-md border border-border/20 bg-background/60 px-2.5 py-2 transition-all hover:border-cyan-500/30 hover:bg-cyan-500/[0.04]"
+                variants={staggerItem}
+                whileHover={{ x: 4 }}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Layers className="size-3 text-cyan-400/50 transition-colors group-hover/item:text-cyan-400" />
+                  <span className="font-mono text-xs text-muted-foreground transition-colors group-hover/item:text-foreground">
+                    render() on actions
+                  </span>
+                </div>
+                <div className="mt-1 ml-5.5 flex items-center gap-1.5">
+                  <div className="h-px w-3 bg-cyan-400/20" />
+                  <p className="font-mono text-[10px] text-muted-foreground/40">
+                    rich React components in chat
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Connection Bridge */}
+        <div className="hidden md:flex flex-col items-center justify-center relative">
+          <DataFlowParticles />
+          <div className="relative z-10 flex flex-col items-center gap-2">
+            <div className="h-20 w-px bg-gradient-to-b from-transparent via-violet-400/30 to-violet-400/10" />
+
+            <motion.div
+              className="flex flex-col items-center gap-1"
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div className="flex items-center gap-0.5">
+                <motion.div
+                  className="h-px w-3 bg-violet-400/60"
+                  animate={{ width: [12, 16, 12] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
+                <motion.div
+                  className="flex size-8 items-center justify-center rounded-full border border-violet-500/30 bg-violet-500/10 shadow-[0_0_20px_rgba(139,92,246,0.15)]"
+                  whileHover={{ scale: 1.2 }}
+                >
+                  <Wifi className="size-3.5 text-violet-400" />
+                </motion.div>
+                <motion.div
+                  className="h-px w-3 bg-violet-400/60"
+                  animate={{ width: [12, 16, 12] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
+              </div>
+              <span className="font-mono text-[9px] font-medium tracking-wider text-violet-400/70">
+                HTTP
+              </span>
+            </motion.div>
+
+            <div className="h-20 w-px bg-gradient-to-b from-violet-400/10 via-violet-400/30 to-transparent" />
+          </div>
+        </div>
+
+        {/* Mobile Connection */}
+        <div className="flex md:hidden items-center justify-center py-3">
+          <div className="flex items-center gap-3">
+            <div className="h-px w-10 bg-gradient-to-r from-transparent to-violet-400/40" />
+            <motion.div
+              className="flex size-8 items-center justify-center rounded-full border border-violet-500/30 bg-violet-500/10"
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <Wifi className="size-3.5 text-violet-400 rotate-90" />
+            </motion.div>
+            <span className="font-mono text-[9px] font-medium tracking-wider text-violet-400/70">
+              HTTP
+            </span>
+            <div className="h-px w-10 bg-gradient-to-r from-violet-400/40 to-transparent" />
+          </div>
+        </div>
+
+        {/* Server Column */}
+        <motion.div
+          className="relative rounded-2xl border border-border/40 bg-gradient-to-b from-emerald-500/[0.03] to-transparent p-1"
+          variants={columnRevealRight}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <GlowingEffect
+            spread={40}
+            glow={true}
+            disabled={false}
+            proximity={64}
+            inactiveZone={0.01}
+            borderWidth={2}
+          />
+          <div className="relative rounded-xl bg-background/80 backdrop-blur-sm p-5">
+            {/* Header */}
+            <div className="mb-5 flex items-center gap-3">
+              <motion.div
+                className="flex size-9 items-center justify-center rounded-lg bg-emerald-500/10 ring-1 ring-emerald-500/20"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              >
+                <ServerIcon className="size-4 text-emerald-400" />
+              </motion.div>
+              <div>
+                <h3 className="font-mono text-sm font-semibold text-foreground">
+                  Server
+                </h3>
+                <p className="font-mono text-[10px] text-muted-foreground/50">
+                  Next.js API Route
+                </p>
+              </div>
+              <motion.div
+                className="ml-auto flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2 py-0.5 ring-1 ring-emerald-500/20"
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+              >
+                <div className="size-1.5 rounded-full bg-emerald-400" />
+                <span className="font-mono text-[9px] text-emerald-400">
+                  RUNNING
+                </span>
+              </motion.div>
+            </div>
+
+            {/* Runtime Section */}
+            <motion.div
+              className="mb-3 rounded-lg border border-emerald-500/15 bg-emerald-500/[0.03] p-3"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="mb-2.5 flex items-center gap-2">
+                <div className="size-1 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.6)]" />
+                <p className="font-mono text-[11px] font-semibold text-emerald-400">
+                  CopilotRuntime
+                </p>
+              </div>
+              <div className="space-y-1.5">
+                {[
+                  { name: "OpenAIAdapter", color: "text-emerald-400" },
+                  { name: "AnthropicAdapter", color: "text-amber-400" },
+                  { name: "GroqAdapter", color: "text-orange-400" },
+                  { name: "GoogleGenAIAdapter", color: "text-blue-400" },
+                ].map((adapter, i) => (
+                  <motion.div
+                    key={adapter.name}
+                    className="group/item flex items-center gap-2.5 rounded-md border border-border/20 bg-background/60 px-2.5 py-2 transition-all hover:border-emerald-500/30 hover:bg-emerald-500/[0.04]"
+                    variants={staggerItem}
+                    whileHover={{ x: 4 }}
+                  >
+                    <motion.div
+                      className={`size-1.5 rounded-full ${
+                        i === 0
+                          ? "bg-emerald-400"
+                          : i === 1
+                          ? "bg-amber-400"
+                          : i === 2
+                          ? "bg-orange-400"
+                          : "bg-blue-400"
+                      }`}
+                      animate={{
+                        boxShadow:
+                          i === 0
+                            ? [
+                                "0 0 0px rgba(52,211,153,0)",
+                                "0 0 8px rgba(52,211,153,0.6)",
+                                "0 0 0px rgba(52,211,153,0)",
+                              ]
+                            : undefined,
+                      }}
+                      transition={
+                        i === 0
+                          ? { duration: 2, repeat: Infinity }
+                          : undefined
+                      }
+                    />
+                    <span className="font-mono text-xs text-muted-foreground transition-colors group-hover/item:text-foreground">
+                      {adapter.name}
+                    </span>
+                    {i === 0 && (
+                      <span className="ml-auto rounded bg-emerald-500/10 px-1.5 py-0.5 font-mono text-[9px] text-emerald-400 ring-1 ring-emerald-500/20">
+                        ACTIVE
+                      </span>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Endpoint Section */}
+            <motion.div
+              className="rounded-lg border border-amber-500/15 bg-amber-500/[0.03] p-3"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="mb-2.5 flex items-center gap-2">
+                <div className="size-1 rounded-full bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.6)]" />
+                <p className="font-mono text-[11px] font-semibold text-amber-400">
+                  API Endpoint
+                </p>
+              </div>
+              <motion.div
+                className="group/item flex items-center gap-2.5 rounded-md border border-border/20 bg-background/60 px-2.5 py-2 transition-all hover:border-amber-500/30 hover:bg-amber-500/[0.04]"
+                variants={staggerItem}
+                whileHover={{ x: 4 }}
+              >
+                <div className="size-1.5 rounded-full bg-amber-400/60" />
+                <span className="font-mono text-xs text-muted-foreground transition-colors group-hover/item:text-foreground">
+                  /api/copilotkit
+                </span>
+                <span className="ml-auto font-mono text-[9px] text-muted-foreground/40">
+                  POST
+                </span>
+              </motion.div>
+            </motion.div>
+
+            {/* Bottom spacer to match browser column height */}
+            <div className="mt-3 flex items-center gap-2 rounded-lg border border-dashed border-border/20 bg-muted/[0.03] px-3 py-2.5">
+              <ShieldCheck className="size-3 text-muted-foreground/30" />
+              <span className="font-mono text-[10px] text-muted-foreground/30">
+                Error boundary fallback enabled
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
 
 export default function FeaturesPage() {
   return (
@@ -341,16 +805,32 @@ export default function FeaturesPage() {
         </section>
 
         {/* ── Architecture Diagram ── */}
-        <section className="border-y border-border/40 bg-muted/10">
-          <div className="mx-auto max-w-4xl px-6 py-20">
+        <section className="relative border-y border-border/40 bg-muted/10 overflow-hidden">
+          {/* Background glow effects */}
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute top-1/2 left-1/4 size-[400px] -translate-y-1/2 rounded-full bg-violet-500/[0.04] blur-[100px]" />
+            <div className="absolute top-1/2 right-1/4 size-[400px] -translate-y-1/2 rounded-full bg-emerald-500/[0.04] blur-[100px]" />
+          </div>
+
+          <div className="relative mx-auto max-w-5xl px-6 py-20">
             <motion.div
-              className="mb-8 text-center"
+              className="mb-10 text-center"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={fadeUp}
               custom={0}
             >
+              <motion.div
+                className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur-sm"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+              >
+                <Layers className="size-3 text-violet-400" />
+                System Overview
+              </motion.div>
               <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                 Architecture
               </h2>
@@ -359,26 +839,7 @@ export default function FeaturesPage() {
               </p>
             </motion.div>
 
-            <motion.div
-              className="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeUp}
-              custom={1}
-            >
-              <div className="mb-3 flex items-center gap-2">
-                <div className="size-2.5 rounded-full bg-red-500/70" />
-                <div className="size-2.5 rounded-full bg-yellow-500/70" />
-                <div className="size-2.5 rounded-full bg-green-500/70" />
-                <span className="ml-2 text-xs text-muted-foreground font-mono">
-                  architecture.txt
-                </span>
-              </div>
-              <pre className="overflow-x-auto whitespace-pre font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                {architectureDiagram}
-              </pre>
-            </motion.div>
+            <ArchitectureDiagram />
           </div>
         </section>
 

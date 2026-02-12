@@ -17,6 +17,7 @@ import { ComponentPageHeader } from "@/components/layout/component-page-header";
 import { getComponentBySlug } from "@/lib/components-data";
 import { CodeBlock } from "@/components/layout/code-block";
 import { ComponentNav } from "@/components/layout/component-nav";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 import { toast } from "sonner";
 
@@ -105,7 +106,9 @@ export default function CopilotFormPage() {
           <ComponentPageHeader component={getComponentBySlug("copilot-form")!} />
 
           {/* Live Demo */}
-          <Card className="mb-8 border-border/50">
+          <div className="relative mb-8 rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50">
             <CardHeader>
               <CardTitle>Live Demo - Company Profile Form</CardTitle>
               <CardDescription>
@@ -127,6 +130,7 @@ export default function CopilotFormPage() {
               />
             </CardContent>
           </Card>
+          </div>
 
           {/* Try these prompts */}
           <div className="mb-8">
@@ -141,18 +145,21 @@ export default function CopilotFormPage() {
           </div>
 
           {/* Code Snippet */}
-          <Card className="border-border/50">
-            <CardHeader>
-              <CardTitle>Usage</CardTitle>
-              <CardDescription>
-                Add CopilotForm to your project with a custom field
-                configuration.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CodeBlock code={codeSnippet} filename="usage.tsx" />
-            </CardContent>
-          </Card>
+          <div className="relative rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50">
+              <CardHeader>
+                <CardTitle>Usage</CardTitle>
+                <CardDescription>
+                  Add CopilotForm to your project with a custom field
+                  configuration.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CodeBlock code={codeSnippet} filename="usage.tsx" />
+              </CardContent>
+            </Card>
+          </div>
 
           <ComponentNav currentSlug="copilot-form" />
         </div>

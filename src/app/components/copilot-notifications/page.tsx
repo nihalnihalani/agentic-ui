@@ -14,6 +14,7 @@ import { ComponentPageHeader } from "@/components/layout/component-page-header";
 import { getComponentBySlug } from "@/lib/components-data";
 import { CodeBlock } from "@/components/layout/code-block";
 import { ComponentNav } from "@/components/layout/component-nav";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 
 const codeSnippet = `import { CopilotNotifications } from "@/components/registry/copilot-notifications";
@@ -57,18 +58,21 @@ export default function CopilotNotificationsPage() {
           <ComponentPageHeader component={component} />
 
           {/* Live Demo */}
-          <Card className="mb-8 border-border/50">
-            <CardHeader>
-              <CardTitle>Live Demo</CardTitle>
-              <CardDescription>
-                A notification center with AI-powered triage. Open the chat to
-                mark as read, dismiss, categorize, prioritize, or summarize notifications.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CopilotNotifications />
-            </CardContent>
-          </Card>
+          <div className="relative mb-8 rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50">
+              <CardHeader>
+                <CardTitle>Live Demo</CardTitle>
+                <CardDescription>
+                  A notification center with AI-powered triage. Open the chat to
+                  mark as read, dismiss, categorize, prioritize, or summarize notifications.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CopilotNotifications />
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Try these prompts */}
           <div className="mb-8">
@@ -93,17 +97,20 @@ export default function CopilotNotificationsPage() {
           </div>
 
           {/* Usage */}
-          <Card className="border-border/50">
-            <CardHeader>
-              <CardTitle>Usage</CardTitle>
-              <CardDescription>
-                Add the notification center to your project with custom notifications.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CodeBlock code={codeSnippet} filename="usage.tsx" />
-            </CardContent>
-          </Card>
+          <div className="relative rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50">
+              <CardHeader>
+                <CardTitle>Usage</CardTitle>
+                <CardDescription>
+                  Add the notification center to your project with custom notifications.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CodeBlock code={codeSnippet} filename="usage.tsx" />
+              </CardContent>
+            </Card>
+          </div>
 
           <ComponentNav currentSlug="copilot-notifications" />
         </div>

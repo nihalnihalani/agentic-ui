@@ -15,6 +15,7 @@ import { ComponentPageHeader } from "@/components/layout/component-page-header";
 import { getComponentBySlug } from "@/lib/components-data";
 import { CodeBlock } from "@/components/layout/code-block";
 import { ComponentNav } from "@/components/layout/component-nav";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 
 interface SaaSMetric {
@@ -154,18 +155,21 @@ export default function CopilotTablePage() {
           <ComponentPageHeader component={getComponentBySlug("copilot-table")!} />
 
           {/* Live Demo */}
-          <Card className="mb-8 border-border/50">
-            <CardHeader>
-              <CardTitle>Live Demo</CardTitle>
-              <CardDescription>
-                Click column headers to sort. Use the filter row to search. Or
-                open the chat to ask AI to sort, filter, or highlight data.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CopilotTable<SaaSMetric> data={sampleData} columns={columns} />
-            </CardContent>
-          </Card>
+          <div className="relative mb-8 rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50">
+              <CardHeader>
+                <CardTitle>Live Demo</CardTitle>
+                <CardDescription>
+                  Click column headers to sort. Use the filter row to search. Or
+                  open the chat to ask AI to sort, filter, or highlight data.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CopilotTable<SaaSMetric> data={sampleData} columns={columns} />
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Try these prompts */}
           <div className="mb-8">
@@ -180,17 +184,20 @@ export default function CopilotTablePage() {
           </div>
 
           {/* Usage */}
-          <Card className="border-border/50">
-            <CardHeader>
-              <CardTitle>Usage</CardTitle>
-              <CardDescription>
-                Drop the component into your project and pass your data and column definitions.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CodeBlock code={codeSnippet} filename="usage.tsx" />
-            </CardContent>
-          </Card>
+          <div className="relative rounded-xl">
+            <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
+            <Card className="relative border-border/50">
+              <CardHeader>
+                <CardTitle>Usage</CardTitle>
+                <CardDescription>
+                  Drop the component into your project and pass your data and column definitions.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CodeBlock code={codeSnippet} filename="usage.tsx" />
+              </CardContent>
+            </Card>
+          </div>
 
           <ComponentNav currentSlug="copilot-table" />
         </div>

@@ -34,7 +34,7 @@ export function Header({ transparent = false }: { transparent?: boolean }) {
 
         <nav className="hidden items-center gap-6 md:flex">
           <Link
-            href="#components"
+            href="/#components"
             className="text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
           >
             Components
@@ -56,7 +56,7 @@ export function Header({ transparent = false }: { transparent?: boolean }) {
         </nav>
 
         <Button asChild size="sm" className="hidden md:inline-flex">
-          <Link href="#components">Get Started</Link>
+          <Link href="/#components">Get Started</Link>
         </Button>
 
         {/* Mobile hamburger menu */}
@@ -73,7 +73,7 @@ export function Header({ transparent = false }: { transparent?: boolean }) {
             </SheetHeader>
             <nav className="flex flex-col gap-4 px-4">
               <Link
-                href="#components"
+                href="/#components"
                 onClick={() => setOpen(false)}
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
               >
@@ -96,7 +96,7 @@ export function Header({ transparent = false }: { transparent?: boolean }) {
                 GitHub
               </Link>
               <Button asChild size="sm" className="mt-2 w-full">
-                <Link href="#components" onClick={() => setOpen(false)}>
+                <Link href="/#components" onClick={() => setOpen(false)}>
                   Get Started
                 </Link>
               </Button>

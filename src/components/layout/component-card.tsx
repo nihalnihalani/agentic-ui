@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { ComponentMeta } from "@/types";
 import { CopyPromptDropdown } from "@/components/layout/copy-prompt-dropdown";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 const categoryConfig: Record<
   string,
@@ -190,7 +191,15 @@ export function ComponentCard({ component, index }: ComponentCardProps) {
       transition={{ duration: 0.4, delay: index * 0.1 }}
     >
       <Link href={`/components/${component.slug}`} className="group block">
-        <div className="rounded-xl bg-gradient-to-br from-violet-500/0 to-blue-500/0 p-px transition-all hover:from-violet-500/20 hover:to-blue-500/20">
+        <div className="relative rounded-xl p-px">
+          <GlowingEffect
+            spread={40}
+            glow={true}
+            disabled={false}
+            proximity={64}
+            inactiveZone={0.01}
+            borderWidth={3}
+          />
           <motion.div
             className="relative flex h-full flex-col overflow-hidden rounded-xl border border-border/60 bg-card/50 backdrop-blur-sm transition-colors hover:border-border hover:bg-card/80"
             whileHover={{ y: -2 }}
@@ -202,11 +211,6 @@ export function ComponentCard({ component, index }: ComponentCardProps) {
                 <Preview />
               </div>
             )}
-
-            {/* Hover glow */}
-            <div className="pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-              <div className="absolute -inset-px rounded-xl bg-gradient-to-br from-violet-500/10 via-transparent to-blue-500/10" />
-            </div>
 
             <div className="relative flex flex-1 flex-col p-6">
               {/* Category badge */}
