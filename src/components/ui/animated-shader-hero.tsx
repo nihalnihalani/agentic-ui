@@ -529,20 +529,16 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
             <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8 shader-animate-fade-in-up shader-delay-800">
               {buttons.primary && (
                 <button
-                  type="button"
                   onClick={buttons.primary.onClick}
-                  className="px-7 py-3 bg-gradient-to-r from-violet-500 to-blue-500 hover:from-violet-600 hover:to-blue-600 text-white rounded-lg font-semibold text-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-violet-500/20 cursor-pointer focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:ring-offset-2 focus:ring-offset-black active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                  aria-label={buttons.primary.text}
+                  className="px-7 py-3 bg-gradient-to-r from-violet-500 to-blue-500 hover:from-violet-600 hover:to-blue-600 text-white rounded-lg font-semibold text-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-violet-500/20"
                 >
                   {buttons.primary.text}
                 </button>
               )}
               {buttons.secondary && (
                 <button
-                  type="button"
                   onClick={buttons.secondary.onClick}
-                  className="px-7 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white/80 rounded-lg font-semibold text-sm transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-black active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                  aria-label={buttons.secondary.text}
+                  className="px-7 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white/80 rounded-lg font-semibold text-sm transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm"
                 >
                   {buttons.secondary.text}
                 </button>

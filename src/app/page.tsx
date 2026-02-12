@@ -11,8 +11,10 @@ export default function Home() {
       <CopilotDiscovery />
       <div className="flex min-h-screen flex-col">
         <Header transparent />
-        <main className="flex-1 pt-16">
-          <ShaderHero />
+        <main className="flex-1">
+          <div className="-mt-16">
+            <ShaderHero />
+          </div>
           <SmartRegistry />
         </main>
         <Footer />

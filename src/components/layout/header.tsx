@@ -18,7 +18,7 @@ export function Header({ transparent = false }: { transparent?: boolean }) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 w-full ${
+      className={`sticky top-0 z-50 w-full ${
         transparent
           ? ""
           : "border-b border-white/5 bg-black/80 backdrop-blur-xl"
