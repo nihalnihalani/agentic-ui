@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Copy, Check, Table, FormInput, Layout, MessageSquare, CalendarDays, FileText } from "lucide-react";
+import { Copy, Check, Table, FormInput, Layout, MessageSquare, CalendarDays } from "lucide-react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { ComponentMeta } from "@/types";
+import { CopyPromptDropdown } from "@/components/layout/copy-prompt-dropdown";
 
 const categoryConfig: Record<
   string,
@@ -167,7 +168,6 @@ interface ComponentCardProps {
 
 export function ComponentCard({ component, index }: ComponentCardProps) {
   const [copied, setCopied] = useState(false);
-  const [promptCopied, setPromptCopied] = useState(false);
   const category = categoryConfig[component.category];
   const Preview = previewMap[component.category];
 
@@ -178,18 +178,6 @@ export function ComponentCard({ component, index }: ComponentCardProps) {
       navigator.clipboard.writeText(component.installCommand);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // Clipboard API not available
-    }
-  }
-
-  function handleCopyPrompt(e: React.MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    try {
-      navigator.clipboard.writeText(component.copyPrompt);
-      setPromptCopied(true);
-      setTimeout(() => setPromptCopied(false), 2000);
     } catch {
       // Clipboard API not available
     }
@@ -252,37 +240,29 @@ export function ComponentCard({ component, index }: ComponentCardProps) {
                 ))}
               </div>
 
-              {/* Install command */}
-              <div className="mt-4 flex items-center gap-2 rounded-lg border border-border/40 bg-muted/30 px-3 py-2">
-                <code className="flex-1 truncate font-mono text-xs text-muted-foreground">
-                  {component.installCommand}
-                </code>
-                <Button
-                  variant="ghost"
-                  size="icon-xs"
-                  onClick={handleCopyPrompt}
-                  className="shrink-0"
-                  title="Copy AI prompt"
-                >
-                  {promptCopied ? (
-                    <Check className="size-3 text-emerald-400" />
-                  ) : (
-                    <FileText className="size-3" />
-                  )}
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon-xs"
-                  onClick={handleCopy}
-                  className="shrink-0"
-                  title="Copy install command"
-                >
-                  {copied ? (
-                    <Check className="size-3 text-emerald-400" />
-                  ) : (
-                    <Copy className="size-3" />
-                  )}
-                </Button>
+              {/* Install command + AI prompt */}
+              <div className="mt-4 space-y-2">
+                <div className="flex items-center gap-2 rounded-lg border border-border/40 bg-muted/30 px-3 py-2">
+                  <code className="flex-1 truncate font-mono text-xs text-muted-foreground">
+                    {component.installCommand}
+                  </code>
+                  <Button
+                    variant="ghost"
+                    size="icon-xs"
+                    onClick={handleCopy}
+                    className="shrink-0"
+                    title="Copy install command"
+                  >
+                    {copied ? (
+                      <Check className="size-3 text-emerald-400" />
+                    ) : (
+                      <Copy className="size-3" />
+                    )}
+                  </Button>
+                </div>
+                <div className="flex justify-end">
+                  <CopyPromptDropdown prompt={component.copyPrompt} size="sm" />
+                </div>
               </div>
             </div>
           </motion.div>

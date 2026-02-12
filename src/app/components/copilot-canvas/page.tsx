@@ -17,7 +17,7 @@ import { ComponentPageHeader } from "@/components/layout/component-page-header";
 import { getComponentBySlug } from "@/lib/components-data";
 import { CodeBlock } from "@/components/layout/code-block";
 import { ComponentNav } from "@/components/layout/component-nav";
-import { PromptCopyBlock } from "@/components/layout/prompt-copy-block";
+
 
 const demoColumns: Column[] = [
   {
@@ -151,14 +151,6 @@ export default function CopilotCanvasPage() {
                 </span>
               ))}
             </div>
-          </div>
-
-          {/* Copy Prompt for AI Tools */}
-          <div className="mb-8">
-            <h3 className="text-sm font-medium text-muted-foreground mb-3">
-              Copy Prompt for AI Tools
-            </h3>
-            <PromptCopyBlock prompt={getComponentBySlug("copilot-canvas")!.copyPrompt} />
           </div>
 
           {/* Code snippet */}

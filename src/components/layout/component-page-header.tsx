@@ -6,6 +6,7 @@ import { ArrowLeft, Copy, Check, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { ComponentMeta } from "@/types";
+import { CopyPromptDropdown } from "@/components/layout/copy-prompt-dropdown";
 
 interface ComponentPageHeaderProps {
   component: ComponentMeta;
@@ -55,6 +56,8 @@ export function ComponentPageHeader({ component }: ComponentPageHeaderProps) {
             )}
           </Button>
         </div>
+
+        <CopyPromptDropdown prompt={component.copyPrompt} />
 
         {component.hooks.map((hook) => (
           <Badge
