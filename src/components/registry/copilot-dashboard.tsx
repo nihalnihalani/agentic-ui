@@ -127,7 +127,7 @@ export function CopilotDashboard({
   metrics: propMetrics,
   className,
 }: CopilotDashboardProps) {
-  const [metrics, setMetrics] = useState<DashboardMetric[]>(
+  const [metrics, _setMetrics] = useState<DashboardMetric[]>(
     propMetrics ?? defaultMetrics
   );
   const [dateRange, setDateRange] = useState<DateRange>("30d");

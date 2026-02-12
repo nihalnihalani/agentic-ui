@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useCopilotReadable, useCopilotAction } from "@copilotkit/react-core";
-import { ArrowUpDown, Search, User } from "lucide-react";
+import { User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Employee {

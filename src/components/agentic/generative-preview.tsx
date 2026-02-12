@@ -14,7 +14,8 @@ type ComponentType = "form" | "table" | "canvas" | "chart" | "chat" | "dashboard
 
 interface PreviewState {
   type: ComponentType;
-  props: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  props: Record<string, any>;
   code: string;
 }
 
@@ -62,7 +63,7 @@ export function GenerativePreview() {
           code,
         });
         return "Preview generated successfully.";
-      } catch (e) {
+      } catch {
         return "Failed to parse component configuration.";
       }
     },

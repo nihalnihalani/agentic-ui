@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { Search, Grid3X3, Table, FormInput, Layout, MessageSquare, CalendarDays } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { components, categories } from "@/lib/components-data";
