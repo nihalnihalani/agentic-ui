@@ -9,8 +9,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { CodeBlock } from "@/components/layout/code-block";
+import { PromptCopyBlock } from "@/components/layout/prompt-copy-block";
+import { getComponentBySlug } from "@/lib/components-data";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+
+const component = getComponentBySlug("animated-shader-hero")!;
 
 const codeSnippet = `import AnimatedShaderHero from "@/components/ui/animated-shader-hero";
 
@@ -74,25 +78,29 @@ export default function AnimatedShaderHeroPage() {
 
         <div className="mb-8">
           <h1 className="text-3xl font-bold tracking-tight mb-2">
-            Animated Shader Hero
+            {component.name}
           </h1>
           <p className="text-muted-foreground text-lg">
-            A stunning WebGL shader-powered hero section with an animated cosmic
-            background, gradient text animations, trust badges, and call-to-action
-            buttons. Fully interactive — the shader responds to pointer movement.
+            {component.description}
           </p>
           <div className="flex flex-wrap gap-2 mt-4">
-            {["WebGL", "shader", "hero", "animation", "landing-page"].map(
-              (tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-border/50 bg-muted/30 px-2.5 py-0.5 text-xs text-muted-foreground"
-                >
-                  {tag}
-                </span>
-              )
-            )}
+            {component.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-border/50 bg-muted/30 px-2.5 py-0.5 text-xs text-muted-foreground"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
+        </div>
+
+        {/* Copy Prompt for AI Tools */}
+        <div className="mb-8">
+          <h3 className="text-sm font-medium text-muted-foreground mb-3">
+            Copy Prompt for AI Tools
+          </h3>
+          <PromptCopyBlock prompt={component.copyPrompt} />
         </div>
       </div>
 
