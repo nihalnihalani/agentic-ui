@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Zap, Github, Menu } from "lucide-react";
+import { Github, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CopilotKitIcon } from "@/components/ui/copilotkit-icon";
 import {
   Sheet,
   SheetTrigger,
@@ -20,7 +21,7 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-blue-500">
-            <Zap className="size-4 text-white" />
+            <CopilotKitIcon className="size-5 text-white" />
           </div>
           <span className="text-lg font-bold tracking-tight">AgenticUI</span>
         </Link>

@@ -1,7 +1,8 @@
 "use client";
 
-import { ArrowRight, Sparkles, Package, Zap, Globe } from "lucide-react";
+import { ArrowRight, Sparkles, Package, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CopilotKitIcon } from "@/components/ui/copilotkit-icon";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { components } from "@/lib/components-data";
@@ -36,7 +37,7 @@ export function Hero() {
             className="motion-reduce:transition-none"
           >
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur-sm">
-              <Sparkles className="size-3 text-violet-400" />
+              <CopilotKitIcon className="size-3.5" />
               Built for CopilotKit
             </span>
           </motion.div>
@@ -105,7 +106,7 @@ export function Hero() {
             </span>
             <span className="h-4 w-px bg-border" />
             <span className="flex items-center gap-1.5">
-              <Zap className="size-3.5" /> CopilotKit Powered
+              <CopilotKitIcon className="size-3.5" /> CopilotKit Powered
             </span>
             <span className="h-4 w-px bg-border" />
             <span className="flex items-center gap-1.5">
