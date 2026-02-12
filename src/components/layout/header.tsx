@@ -116,6 +116,10 @@ export function Header({ transparent = false }: { transparent?: boolean }) {
           <LiquidGitHubButton />
         </nav>
 
+        <Button asChild size="sm" className="hidden md:inline-flex">
+          <Link href="#components">Get Started</Link>
+        </Button>
+
         {/* Mobile hamburger menu */}
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
@@ -153,6 +157,11 @@ export function Header({ transparent = false }: { transparent?: boolean }) {
                 <Github className="size-4" />
                 GitHub
               </Link>
+              <Button asChild size="sm" className="mt-2 w-full">
+                <Link href="#components" onClick={() => setOpen(false)}>
+                  Get Started
+                </Link>
+              </Button>
             </nav>
           </SheetContent>
         </Sheet>
