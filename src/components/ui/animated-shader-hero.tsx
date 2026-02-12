@@ -484,7 +484,7 @@ const LiquidButton: React.FC<{ text: string; onClick?: () => void }> = ({
 
   return (
     <div
-      className="relative inline-block sm:w-36 w-14 h-[2.7em] group dark:bg-black bg-white dark:border-white border-black border-2 rounded-lg cursor-pointer"
+      className="relative inline-block w-52 h-[3em] group dark:bg-black bg-white dark:border-white border-black border-2 rounded-lg cursor-pointer"
       onClick={onClick}
     >
       <div className="absolute w-[112.81%] h-[128.57%] top-[8.57%] left-1/2 -translate-x-1/2 filter blur-[19px] opacity-70">
@@ -515,10 +515,9 @@ const LiquidButton: React.FC<{ text: string; onClick?: () => void }> = ({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <span className="flex items-center justify-between px-4 gap-2 rounded-lg group-hover:text-yellow-400 text-white text-xl font-semibold tracking-wide whitespace-nowrap">
-          <Star className="group-hover:fill-yellow-400 fill-white w-6 h-6 flex-shrink-0 sm:inline-block hidden" />
-          <Github className="sm:hidden inline-block group-hover:fill-yellow-400 fill-white w-6 h-6 flex-shrink-0" />
-          <span className="sm:inline-block hidden">{text}</span>
+        <span className="flex items-center justify-center px-4 gap-2 rounded-lg group-hover:text-yellow-400 text-white text-sm font-semibold tracking-wide whitespace-nowrap">
+          <Star className="group-hover:fill-yellow-400 fill-white w-4 h-4 flex-shrink-0" />
+          <span>{text}</span>
         </span>
       </button>
     </div>
