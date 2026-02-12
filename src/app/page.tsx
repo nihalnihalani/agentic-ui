@@ -1,5 +1,5 @@
 import { Header } from "@/components/layout/header";
-import { Hero } from "@/components/layout/hero";
+import { ShaderHero } from "@/components/layout/shader-hero";
 import { SmartRegistry } from "@/components/agentic/smart-registry";
 import { Footer } from "@/components/layout/footer";
 import { CopilotProvider } from "@/components/layout/copilot-provider";
@@ -12,7 +12,7 @@ export default function Home() {
       <div className="flex min-h-screen flex-col">
         <Header />
         <main className="flex-1">
-          <Hero />
+          <ShaderHero />
           <SmartRegistry />
         </main>
         <Footer />

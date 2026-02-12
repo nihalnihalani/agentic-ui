@@ -3,7 +3,7 @@ import { CopilotKitIcon } from "@/components/ui/copilotkit-icon";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/40">
+    <footer className="border-t border-white/5">
       {/* Gradient divider */}
       <div className="h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
 

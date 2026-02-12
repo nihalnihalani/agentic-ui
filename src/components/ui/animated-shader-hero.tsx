@@ -80,10 +80,10 @@ void main(void) {
         uv+=.1*cos(i*vec2(.1+.01*i, .8)+i*i+T*.5+.1*uv.x);
         vec2 p=uv;
         float d=length(p);
-        col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);
+        col+=.00125/d*(cos(sin(i)*vec3(3,2,1))+1.);
         float b=noise(i+p+bg*1.731);
         col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));
-        col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);
+        col=mix(col,vec3(bg*.05,bg*.06,bg*.25),d);
     }
     O=vec4(col,1);
 }`;
@@ -465,64 +465,72 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
 
   return (
     <div
-      className={`relative w-full h-screen overflow-hidden bg-black ${className}`}
+      className={`relative w-full min-h-[90vh] overflow-hidden bg-black ${className}`}
     >
       <ShaderHeroStyles />
 
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full object-contain touch-none"
+        className="absolute inset-0 w-full h-full object-cover touch-none"
         style={{ background: "black" }}
       />
 
+      {/* Bottom gradient fade — blends shader into page background */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-48"
+        style={{ background: "linear-gradient(to top, black, transparent)" }}
+      />
+
       {/* Hero Content Overlay */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-white">
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-white pt-16 pb-24">
         {/* Trust Badge */}
         {trustBadge && (
           <div className="mb-8 shader-animate-fade-in-down">
-            <div className="flex items-center gap-2 px-6 py-3 bg-orange-500/10 backdrop-blur-md border border-orange-300/30 rounded-full text-sm">
+            <div className="flex items-center gap-2 px-5 py-2.5 bg-violet-500/10 backdrop-blur-md border border-violet-400/20 rounded-full text-sm">
               {trustBadge.icons && (
                 <div className="flex">
                   {trustBadge.icons.map((icon, index) => (
                     <span
                       key={index}
-                      className="text-yellow-300"
+                      className="text-violet-300"
                     >
                       {icon}
                     </span>
                   ))}
                 </div>
               )}
-              <span className="text-orange-100">{trustBadge.text}</span>
+              <span className="text-violet-200/90">{trustBadge.text}</span>
             </div>
           </div>
         )}
 
-        <div className="text-center space-y-6 max-w-5xl mx-auto px-4">
+        <div className="text-center space-y-6 max-w-4xl mx-auto px-6">
           {/* Main Heading with Animation */}
-          <div className="space-y-2">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent shader-animate-fade-in-up shader-delay-200">
+          <div className="space-y-1">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent shader-animate-fade-in-up shader-delay-200">
               {headline.line1}
             </h1>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-yellow-300 via-orange-400 to-red-400 bg-clip-text text-transparent shader-animate-fade-in-up shader-delay-400">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent shader-animate-fade-in-up shader-delay-400">
               {headline.line2}
             </h1>
           </div>
 
           {/* Subtitle with Animation */}
-          <div className="max-w-3xl mx-auto shader-animate-fade-in-up shader-delay-600">
-            <p className="text-lg md:text-xl lg:text-2xl text-orange-100/90 font-light leading-relaxed">
-              {subtitle}
-            </p>
-          </div>
+          {subtitle && (
+            <div className="max-w-2xl mx-auto shader-animate-fade-in-up shader-delay-600">
+              <p className="text-base sm:text-lg md:text-xl text-white/60 font-light leading-relaxed">
+                {subtitle}
+              </p>
+            </div>
+          )}
 
           {/* CTA Buttons with Animation */}
           {buttons && (
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10 shader-animate-fade-in-up shader-delay-800">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8 shader-animate-fade-in-up shader-delay-800">
               {buttons.primary && (
                 <button
                   onClick={buttons.primary.onClick}
-                  className="px-8 py-4 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-black rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/25"
+                  className="px-7 py-3 bg-gradient-to-r from-violet-500 to-blue-500 hover:from-violet-600 hover:to-blue-600 text-white rounded-lg font-semibold text-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-violet-500/20"
                 >
                   {buttons.primary.text}
                 </button>
@@ -530,7 +538,7 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
               {buttons.secondary && (
                 <button
                   onClick={buttons.secondary.onClick}
-                  className="px-8 py-4 bg-orange-500/10 hover:bg-orange-500/20 border border-orange-300/30 hover:border-orange-300/50 text-orange-100 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+                  className="px-7 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white/80 rounded-lg font-semibold text-sm transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm"
                 >
                   {buttons.secondary.text}
                 </button>
