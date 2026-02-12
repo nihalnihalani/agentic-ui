@@ -189,8 +189,8 @@ const { handleRequest } =
 ];
 
 const stats = [
-  { label: "AI Components", value: "4" },
-  { label: "CopilotKit Actions", value: "15+" },
+  { label: "AI Components", value: "12" },
+  { label: "CopilotKit Actions", value: "60+" },
   { label: "TypeScript", value: "100%" },
   { label: "Design System", value: "shadcn/ui" },
 ];
