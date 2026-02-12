@@ -10,8 +10,8 @@ export default function Home() {
     <CopilotProvider>
       <CopilotDiscovery />
       <div className="flex min-h-screen flex-col">
-        <Header />
-        <main className="flex-1">
+        <Header transparent />
+        <main className="flex-1 pt-16">
           <ShaderHero />
           <SmartRegistry />
         </main>

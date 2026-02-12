@@ -13,15 +13,21 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 
-export function Header() {
+export function Header({ transparent = false }: { transparent?: boolean }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-black/40 backdrop-blur-xl">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 w-full ${
+        transparent
+          ? ""
+          : "border-b border-white/5 bg-black/80 backdrop-blur-xl"
+      }`}
+    >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-blue-500">
-            <CopilotKitIcon className="size-5 text-white" />
+          <div className="flex size-8 items-center justify-center">
+            <CopilotKitIcon className="size-6 text-white" />
           </div>
           <span className="text-lg font-bold tracking-tight">AgenticUI</span>
         </Link>
