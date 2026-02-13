@@ -1,0 +1,89 @@
+# Agentic UI Registry - Cursor Rules
+
+## Project Overview
+This is a Next.js component registry showcasing AI-powered UI components built with CopilotKit. Each component demonstrates a specific pattern for integrating AI capabilities into React UI elements using CopilotKit hooks.
+
+## Architecture Pattern
+Every registry component follows the same integration pattern:
+1. **useCopilotReadable** - Expose component state to the AI so it has context about the current UI
+2. **useCopilotAction** - Define actions the AI can invoke to manipulate the component (sort, filter, highlight, add items, etc.)
+3. **render callback** - Each action includes a render prop that shows inline feedback in the chat (progress spinners, completion confirmations)
+4. **Manual interaction** - Components remain fully interactive without AI; all state changes work through standard React state
+
+## Tech Stack
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript (strict)
+- **Styling**: Tailwind CSS v4 with dark-first design
+- **AI Integration**: CopilotKit (@copilotkit/react-core, @copilotkit/react-ui)
+- **UI Primitives**: shadcn/ui (Card, Badge, Button, Input, Tabs)
+- **Icons**: lucide-react
+- **Animations**: framer-motion (used sparingly)
+
+## File Organization
+```
+src/
+  app/
+    api/copilotkit/     # CopilotKit runtime endpoint
+    components/         # Demo pages for each component (one folder per slug)
+      copilot-table/page.tsx
+      copilot-form/page.tsx
+      ...
+    page.tsx            # Landing page with component grid
+  components/
+    registry/           # The actual reusable components (one file each)
+      copilot-table.tsx
+      copilot-form.tsx
+      copilot-dashboard.tsx
+      copilot-canvas.tsx
+      copilot-chart.tsx
+      copilot-calendar.tsx
+      copilot-search.tsx
+      copilot-editor.tsx
+      copilot-timeline.tsx
+      copilot-notifications.tsx
+      copilot-chat.tsx
+      copilot-textarea.tsx
+    agentic/            # Meta-components (generative preview, etc.)
+    layout/             # Shared layout components (header, nav, code-block)
+    ui/                 # shadcn/ui primitives
+  lib/
+    components-data.ts  # Component metadata array (slugs, descriptions, install commands)
+    utils.ts            # cn() utility
+  types/
+    index.ts            # Shared TypeScript interfaces (ComponentMeta, etc.)
+```
+
+## Style Conventions
+- Dark theme first: backgrounds use bg-background, text uses text-foreground
+- Borders: border-border/50 (subtle), border-border (standard)
+- Cards: bg-card/50 with backdrop-blur-sm for glassmorphism
+- Color coding by action type:
+  - Blue: sorting, navigation
+  - Purple/Violet: filtering, AI highlights
+  - Emerald/Green: success, AI-filled, positive changes
+  - Amber: warnings, annotations, comparisons
+  - Rose/Red: deletions, negative changes
+- Glow effects: shadow-[0_0_16px_rgba(color,0.35)] for highlighted elements
+- All action render callbacks follow the same pattern:
+  - inProgress: Loader2 spinner + action text
+  - complete: CheckCircle/Sparkles icon + confirmation text
+
+## Component Creation Checklist
+When creating a new registry component:
+1. Create the component in src/components/registry/copilot-{name}.tsx
+2. Add "use client" directive at the top
+3. Export the main component and its prop interfaces
+4. Include default/sample data so it renders without any props
+5. Add useCopilotReadable with full state description
+6. Add useCopilotAction(s) with render callbacks for chat feedback
+7. Create a demo page at src/app/components/{slug}/page.tsx
+8. Add the component metadata to src/lib/components-data.ts
+9. Use the ComponentPageHeader, GlowingEffect, CodeBlock, and ComponentNav layout components
+
+## Key Patterns
+- All components use "use client" since they use React hooks
+- State highlight animations: add item to a Set, set a 1500ms timeout to remove it
+- Action handlers return string messages (success or error descriptions)
+- Components accept optional className prop using cn() utility
+- Demo pages wrap content in CopilotKit provider with CopilotPopup
+- Chat suggestions use useCopilotChatSuggestions with domain-specific prompts

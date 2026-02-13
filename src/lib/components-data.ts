@@ -10,7 +10,7 @@ export const components: ComponentMeta[] = [
     tags: ["table", "data-grid", "sort", "filter", "analytics"],
     hooks: ["useCopilotReadable", "useCopilotAction"],
     preview: "/previews/copilot-table.png",
-    installCommand: 'npx shadcn@latest add "https://agenticui.dev/r/copilot-table"',
+    installCommand: 'npx shadcn@latest add "https://agentic-ui-registry.vercel.app/r/copilot-table"',
     copyPrompt: `Create a CopilotTable — an AI-powered, sortable, filterable data grid built with CopilotKit and React.
 
 ## Core Concept
@@ -218,7 +218,7 @@ export default function App() {
     tags: ["form", "input", "auto-fill", "intent", "settings"],
     hooks: ["useCopilotReadable", "useCopilotAction"],
     preview: "/previews/copilot-form.png",
-    installCommand: 'npx shadcn@latest add "https://agenticui.dev/r/copilot-form"',
+    installCommand: 'npx shadcn@latest add "https://agentic-ui-registry.vercel.app/r/copilot-form"',
     copyPrompt: `Create a CopilotForm — an AI-powered intent-driven form built with CopilotKit and React that fills itself when users describe what they want in natural language.
 
 ## Core Concept
@@ -417,7 +417,7 @@ export default function App() {
     tags: ["kanban", "board", "drag-drop", "tasks", "project"],
     hooks: ["useCopilotReadable", "useCopilotAction"],
     preview: "/previews/copilot-canvas.png",
-    installCommand: 'npx shadcn@latest add "https://agenticui.dev/r/copilot-canvas"',
+    installCommand: 'npx shadcn@latest add "https://agentic-ui-registry.vercel.app/r/copilot-canvas"',
     copyPrompt: `Create a CopilotCanvas — an AI-powered kanban board built with CopilotKit and React with full drag-and-drop support and five AI actions for adding items, removing items, moving items between columns, reordering items, and adding new columns.
 
 ## Core Concept
@@ -655,7 +655,7 @@ export default function App() {
     tags: ["textarea", "editor", "autocomplete", "writing", "AI-assist"],
     hooks: ["useCopilotReadable", "useCopilotAction", "CopilotTextarea"],
     preview: "/previews/copilot-textarea.png",
-    installCommand: 'npx shadcn@latest add "https://agenticui.dev/r/copilot-textarea"',
+    installCommand: 'npx shadcn@latest add "https://agentic-ui-registry.vercel.app/r/copilot-textarea"',
     copyPrompt: `Create a CopilotTextEditor — an AI-powered text editor with real-time inline autocompletions built with CopilotKit's CopilotTextarea component, plus three AI actions for replacing, appending, and clearing text content.
 
 ## Core Concept
@@ -842,7 +842,7 @@ export default function App() {
     tags: ["chart", "visualization", "bar-chart", "line-chart", "analytics"],
     hooks: ["useCopilotReadable", "useCopilotAction"],
     preview: "/previews/copilot-chart.png",
-    installCommand: 'npx shadcn@latest add "https://agenticui.dev/r/copilot-chart"',
+    installCommand: 'npx shadcn@latest add "https://agentic-ui-registry.vercel.app/r/copilot-chart"',
     copyPrompt: `Create a CopilotChart — an AI-powered interactive data visualization component built with CopilotKit and React that renders SaaS revenue data as both bar and line charts using pure SVG, with AI-controlled chart type switching, date range filtering, data point highlighting, and text annotations.
 
 ## Core Concept
@@ -962,7 +962,7 @@ The component must be marked with "use client" at the top of the file.`,
     tags: ["chat", "messaging", "conversation", "messages", "communication"],
     hooks: ["useCopilotReadable", "useCopilotAction"],
     preview: "/previews/copilot-chat.png",
-    installCommand: 'npx shadcn@latest add "https://agenticui.dev/r/copilot-chat"',
+    installCommand: 'npx shadcn@latest add "https://agentic-ui-registry.vercel.app/r/copilot-chat"',
     copyPrompt: `Create a CopilotChat — an AI-powered custom chat interface built with CopilotKit and React that features message bubbles with sender alignment, a typing indicator animation, message search with highlighting, conversation summarization, and four AI actions for sending messages, clearing history, searching, and summarizing.
 
 ## Core Concept
@@ -1084,7 +1084,7 @@ The component must be marked with "use client" at the top of the file.`,
     tags: ["dashboard", "metrics", "KPI", "sparkline", "insights"],
     hooks: ["useCopilotReadable", "useCopilotAction"],
     preview: "/previews/copilot-dashboard.png",
-    installCommand: 'npx shadcn@latest add "https://agenticui.dev/r/copilot-dashboard"',
+    installCommand: 'npx shadcn@latest add "https://agentic-ui-registry.vercel.app/r/copilot-dashboard"',
     copyPrompt: `Create a CopilotDashboard — an AI-powered metrics dashboard component built with CopilotKit and React that displays KPI cards with sparkline mini-charts, date range filtering, metric highlighting with glow effects, metric comparison, and AI-generated insight cards.
 
 ## Core Concept
@@ -1204,7 +1204,7 @@ The component must be marked with "use client" at the top of the file.`,
     tags: ["calendar", "schedule", "events", "planner", "time"],
     hooks: ["useCopilotReadable", "useCopilotAction"],
     preview: "/previews/copilot-calendar.png",
-    installCommand: 'npx shadcn@latest add "https://agenticui.dev/r/copilot-calendar"',
+    installCommand: 'npx shadcn@latest add "https://agentic-ui-registry.vercel.app/r/copilot-calendar"',
     copyPrompt: `Create a CopilotCalendar — an AI-powered weekly calendar grid built with CopilotKit and React that displays seven days of time slots with colored event blocks, and provides five AI actions for adding, moving, removing, finding free slots, and clearing events through natural language.
 
 ## Core Concept
@@ -1403,7 +1403,7 @@ Try saying: "Schedule a team lunch on Friday at noon for 1 hour", "Move the stan
     tags: ["editor", "markdown", "writing", "rich-text", "document"],
     hooks: ["useCopilotReadable", "useCopilotAction"],
     preview: "/previews/copilot-editor.png",
-    installCommand: 'npx shadcn@latest add "https://agenticui.dev/r/copilot-editor"',
+    installCommand: 'npx shadcn@latest add "https://agentic-ui-registry.vercel.app/r/copilot-editor"',
     copyPrompt: `Create a CopilotEditor — an AI-powered split-pane markdown editor built with CopilotKit and React that provides real-time preview, a formatting toolbar, and five AI actions for inserting, replacing, formatting, improving, and adding headings to document content.
 
 ## Core Concept
@@ -1603,7 +1603,7 @@ export default function EditorPage() {
     tags: ["timeline", "milestones", "project", "roadmap", "events"],
     hooks: ["useCopilotReadable", "useCopilotAction"],
     preview: "/previews/copilot-timeline.png",
-    installCommand: 'npx shadcn@latest add "https://agenticui.dev/r/copilot-timeline"',
+    installCommand: 'npx shadcn@latest add "https://agentic-ui-registry.vercel.app/r/copilot-timeline"',
     copyPrompt: `Create a CopilotTimeline — an AI-powered project milestone timeline built with CopilotKit and React that displays milestones along a vertical axis with alternating card layout on desktop and stacked layout on mobile, with four AI actions for adding, removing, updating, and reordering milestones.
 
 ## Core Concept
@@ -1862,7 +1862,7 @@ export default function TimelinePage() {
     tags: ["notifications", "alerts", "inbox", "triage", "messages"],
     hooks: ["useCopilotReadable", "useCopilotAction"],
     preview: "/previews/copilot-notifications.png",
-    installCommand: 'npx shadcn@latest add "https://agenticui.dev/r/copilot-notifications"',
+    installCommand: 'npx shadcn@latest add "https://agentic-ui-registry.vercel.app/r/copilot-notifications"',
     copyPrompt: `Create a CopilotNotifications — an AI-powered notification center built with CopilotKit and React that provides filterable tabs, priority-based color coding, dismissal animations, and six AI actions for marking as read, dismissing, categorizing, prioritizing, and summarizing notifications.
 
 ## Core Concept
@@ -2147,7 +2147,7 @@ export default function NotificationsPage() {
     tags: ["search", "filter", "facets", "results", "catalog"],
     hooks: ["useCopilotReadable", "useCopilotAction"],
     preview: "/previews/copilot-search.png",
-    installCommand: 'npx shadcn@latest add "https://agenticui.dev/r/copilot-search"',
+    installCommand: 'npx shadcn@latest add "https://agentic-ui-registry.vercel.app/r/copilot-search"',
     copyPrompt: `Create a CopilotSearch — an AI-powered product search interface built with CopilotKit and React that provides text search, category filter chips, sortable results in a responsive grid, star ratings, stock indicators, and five AI actions for searching, filtering, removing filters, sorting, and highlighting products.
 
 ## Core Concept
@@ -2394,6 +2394,59 @@ export default function SearchPage() {
 }
 \`\`\``,
   },
+  {
+    slug: "research-agent",
+    name: "ResearchAgent",
+    description:
+      "An AI research agent that conducts multi-step investigations with a visual pipeline. It searches, analyzes, and synthesizes findings into structured reports with relevance scoring.",
+    category: "agentic",
+    tags: ["agent", "research", "pipeline", "multi-step", "synthesis"],
+    hooks: ["useCopilotReadable", "useCopilotAction"],
+    preview: "/previews/research-agent.png",
+    installCommand: 'npx shadcn@latest add "https://agentic-ui-registry.vercel.app/r/research-agent"',
+    copyPrompt: `Create a ResearchAgent — an AI-powered multi-step research component built with CopilotKit and React.
+
+## Core Concept
+ResearchAgent simulates a multi-step AI research pipeline. It exposes research state (topic, status, findings, synthesis) via useCopilotReadable and provides a conductResearch action that accepts a topic and depth, then progresses through searching, analyzing, and synthesizing stages with visual pipeline feedback. Findings are displayed in cards with relevance scoring, and a synthesis section summarizes all findings.
+
+## Dependencies
+- react (useState, useCallback, useRef)
+- @copilotkit/react-core (useCopilotReadable, useCopilotAction)
+- lucide-react (Search, FileText, Brain, CheckCircle, Loader2, Sparkles, ExternalLink)
+- A cn classname merge utility
+- Tailwind CSS
+
+## Component Props
+interface CopilotResearchAgentProps {
+  initialState?: Partial<ResearchState>;
+  className?: string;
+}
+
+## Key Interfaces
+interface ResearchFinding {
+  id: string;
+  title: string;
+  summary: string;
+  source: string;
+  relevance: "high" | "medium" | "low";
+}
+
+interface ResearchState {
+  topic: string;
+  status: "idle" | "searching" | "analyzing" | "synthesizing" | "complete";
+  depth: "quick" | "standard" | "deep";
+  findings: ResearchFinding[];
+  synthesis: string | null;
+}
+
+## Actions
+1. conductResearch - Accepts topic, depth, findings JSON, and synthesis. Progresses through pipeline stages with delays.
+2. highlightFinding - Highlights a specific finding card with a glow effect.
+3. clearResearch - Resets to idle state.
+
+## Usage
+<CopilotResearchAgent />`,
+  },
 ];
 
 export const categories = [
@@ -2403,6 +2456,7 @@ export const categories = [
   { id: "canvas", label: "Canvas & Board", icon: "Layout", count: components.filter((c) => c.category === "canvas").length },
   { id: "chat", label: "Chat & Messaging", icon: "MessageSquare", count: components.filter((c) => c.category === "chat").length },
   { id: "productivity", label: "Productivity", icon: "CalendarDays", count: components.filter((c) => c.category === "productivity").length },
+  { id: "agentic", label: "Agentic", icon: "Brain", count: components.filter((c) => c.category === "agentic").length },
 ];
 
 export function getComponentBySlug(slug: string): ComponentMeta | undefined {

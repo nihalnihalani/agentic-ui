@@ -26,7 +26,7 @@ export function ShaderHero() {
         },
         secondary: {
           text: "View on GitHub",
-          onClick: () => window.open("https://github.com/CopilotKit/copilotkit", "_blank"),
+          onClick: () => window.open("https://github.com/nihalnihalani/agentic-ui", "_blank"),
         },
       }}
     />

@@ -2,7 +2,7 @@ export interface ComponentMeta {
   slug: string;
   name: string;
   description: string;
-  category: "data" | "forms" | "canvas" | "layout" | "chat" | "productivity";
+  category: "data" | "forms" | "canvas" | "layout" | "chat" | "productivity" | "agentic";
   tags: string[];
   hooks: string[];
   preview: string;

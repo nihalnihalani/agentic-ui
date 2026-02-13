@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "copilot-textarea",
+  "type": "registry:component",
+  "title": "CopilotTextarea",
+  "description": "AI-powered text input with inline suggestions and autocompletion.",
+  "dependencies": [
+    "@copilotkit/react-core",
+    "@copilotkit/react-textarea",
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/copilot-textarea.tsx",
+      "content": "\"use client\";\n\nimport { useState } from \"react\";\nimport { CopilotTextarea } from \"@copilotkit/react-textarea\";\nimport \"@copilotkit/react-textarea/styles.css\";\nimport { useCopilotReadable, useCopilotAction } from \"@copilotkit/react-core\";\nimport { cn } from \"@/lib/utils\";\n\ninterface CopilotTextEditorProps {\n  initialContent?: string;\n  purpose?: string;\n  placeholder?: string;\n  className?: string;\n  onContentChange?: (content: string) => void;\n}\n\nexport function CopilotTextEditor({\n  initialContent = \"\",\n  purpose = \"writing content\",\n  placeholder = \"Start typing... AI will help you write.\",\n  className,\n  onContentChange,\n}: CopilotTextEditorProps) {\n  const [content, setContent] = useState(initialContent);\n\n  useCopilotReadable({\n    description: \"The current content of the AI-powered text editor\",\n    value: {\n      content,\n      wordCount: content.split(/\\s+/).filter(Boolean).length,\n      purpose,\n    },\n  });\n\n  useCopilotAction({\n    name: \"setTextContent\",\n    description: \"Replace the entire text content in the editor\",\n    parameters: [\n      {\n        name: \"content\",\n        type: \"string\",\n        description: \"The new content\",\n        required: true,\n      },\n    ],\n    handler: ({ content: newContent }) => {\n      setContent(newContent);\n      onContentChange?.(newContent);\n      return \"Content updated\";\n    },\n  });\n\n  useCopilotAction({\n    name: \"appendText\",\n    description: \"Append text to the end of the current content\",\n    parameters: [\n      {\n        name: \"text\",\n        type: \"string\",\n        description: \"Text to append\",\n        required: true,\n      },\n    ],\n    handler: ({ text }) => {\n      const updated = content + text;\n      setContent(updated);\n      onContentChange?.(updated);\n      return \"Text appended\";\n    },\n  });\n\n  useCopilotAction({\n    name: \"clearText\",\n    description: \"Clear all text content from the editor\",\n    parameters: [],\n    handler: () => {\n      setContent(\"\");\n      onContentChange?.(\"\");\n      return \"Content cleared\";\n    },\n  });\n\n  const handleChange = (newContent: string) => {\n    setContent(newContent);\n    onContentChange?.(newContent);\n  };\n\n  const wordCount = content.split(/\\s+/).filter(Boolean).length;\n  const charCount = content.length;\n\n  return (\n    <div className={cn(\"space-y-3\", className)}>\n      <CopilotTextarea\n        className=\"min-h-[200px] w-full rounded-lg border border-border/50 bg-background/50 p-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring/30\"\n        placeholder={placeholder}\n        value={content}\n        onValueChange={handleChange}\n        autosuggestionsConfig={{\n          textareaPurpose: purpose,\n          chatApiConfigs: {\n            suggestionsApiConfig: {\n              maxTokens: 20,\n              stop: [\".\", \"?\", \"!\"],\n            },\n          },\n        }}\n      />\n      <div className=\"flex items-center justify-between px-1 text-xs text-muted-foreground\">\n        <span>\n          {wordCount} words · {charCount} characters\n        </span>\n        <span className=\"text-emerald-400/70\">AI suggestions active</span>\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

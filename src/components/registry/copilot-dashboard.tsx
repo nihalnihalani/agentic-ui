@@ -127,7 +127,8 @@ export function CopilotDashboard({
   metrics: propMetrics,
   className,
 }: CopilotDashboardProps) {
-  const [metrics, _setMetrics] = useState<DashboardMetric[]>(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [metrics, setMetrics] = useState<DashboardMetric[]>(
     propMetrics ?? defaultMetrics
   );
   const [dateRange, setDateRange] = useState<DateRange>("30d");

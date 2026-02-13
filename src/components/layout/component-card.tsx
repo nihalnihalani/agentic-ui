@@ -50,6 +50,12 @@ const categoryConfig: Record<
       "bg-orange-500/10 text-orange-400 border-orange-500/20",
     icon: <CalendarDays className="size-3" />,
   },
+  agentic: {
+    label: "Agentic",
+    color:
+      "bg-purple-500/10 text-purple-400 border-purple-500/20",
+    icon: <Layout className="size-3" />,
+  },
 };
 
 function DataPreview() {
@@ -154,12 +160,40 @@ function ProductivityPreview() {
   );
 }
 
+function AgenticPreview() {
+  return (
+    <div className="flex flex-col gap-2 px-6 pt-6 pb-4">
+      <div className="flex items-center gap-2">
+        <div className="size-2 rounded-full bg-purple-400/60 animate-pulse" />
+        <div className="h-2 w-20 rounded bg-purple-400/30" />
+      </div>
+      <div className="ml-4 flex items-center gap-2">
+        <div className="h-1 w-1 rounded-full bg-purple-400/40" />
+        <div className="h-2 w-28 rounded bg-purple-400/20" />
+      </div>
+      <div className="ml-4 flex items-center gap-2">
+        <div className="h-1 w-1 rounded-full bg-purple-400/40" />
+        <div className="h-2 w-24 rounded bg-purple-400/15" />
+      </div>
+      <div className="flex items-center gap-2">
+        <div className="size-2 rounded-full bg-purple-400/40" />
+        <div className="h-2 w-16 rounded bg-purple-400/25" />
+      </div>
+      <div className="flex items-center gap-2">
+        <div className="size-2 rounded-full bg-purple-400/30" />
+        <div className="h-2 w-12 rounded bg-purple-400/15" />
+      </div>
+    </div>
+  );
+}
+
 const previewMap: Record<string, React.FC> = {
   data: DataPreview,
   forms: FormsPreview,
   canvas: CanvasPreview,
   chat: ChatPreview,
   productivity: ProductivityPreview,
+  agentic: AgenticPreview,
 };
 
 interface ComponentCardProps {
@@ -169,7 +203,11 @@ interface ComponentCardProps {
 
 export function ComponentCard({ component, index }: ComponentCardProps) {
   const [copied, setCopied] = useState(false);
-  const category = categoryConfig[component.category];
+  const category = categoryConfig[component.category] ?? {
+    label: component.category,
+    color: "bg-muted text-muted-foreground border-border/50",
+    icon: <Layout className="size-3" />,
+  };
   const Preview = previewMap[component.category];
 
   function handleCopy(e: React.MouseEvent) {
