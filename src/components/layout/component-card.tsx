@@ -7,7 +7,6 @@ import { motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { ComponentMeta } from "@/types";
-import { CopyPromptDropdown } from "@/components/layout/copy-prompt-dropdown";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 const categoryConfig: Record<
@@ -282,8 +281,8 @@ export function ComponentCard({ component, index }: ComponentCardProps) {
                 ))}
               </div>
 
-              {/* Install command + AI prompt */}
-              <div className="mt-4 space-y-2">
+              {/* Install command */}
+              <div className="mt-4">
                 <div className="flex items-center gap-2 rounded-lg border border-border/40 bg-muted/30 px-3 py-2">
                   <code className="flex-1 truncate font-mono text-xs text-muted-foreground">
                     {component.installCommand}
@@ -301,9 +300,6 @@ export function ComponentCard({ component, index }: ComponentCardProps) {
                       <Copy className="size-3" />
                     )}
                   </Button>
-                </div>
-                <div className="flex justify-end">
-                  <CopyPromptDropdown prompt={component.copyPrompt} size="sm" />
                 </div>
               </div>
             </div>
