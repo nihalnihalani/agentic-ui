@@ -247,15 +247,14 @@ export function CopilotChat({ initialMessages, className }: CopilotChatProps) {
     },
     handler: ({ query }) => {
       const lowerQuery = query.toLowerCase();
+      let matchCount = 0;
       setMessages((prev) =>
-        prev.map((msg) => ({
-          ...msg,
-          isHighlighted: msg.content.toLowerCase().includes(lowerQuery),
-        }))
+        prev.map((msg) => {
+          const matches = msg.content.toLowerCase().includes(lowerQuery);
+          if (matches) matchCount++;
+          return { ...msg, isHighlighted: matches };
+        })
       );
-      const matchCount = messages.filter((m) =>
-        m.content.toLowerCase().includes(lowerQuery)
-      ).length;
       return `Found ${matchCount} message(s) matching "${query}"`;
     },
   });

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { useCopilotReadable, useCopilotAction } from "@copilotkit/react-core";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -45,6 +45,9 @@ export function CopilotCanvas({
     sourceColumnId: string;
   } | null>(null);
   const [dragOverColumn, setDragOverColumn] = useState<string | null>(null);
+  const [addingToColumn, setAddingToColumn] = useState<string | null>(null);
+  const [newItemTitle, setNewItemTitle] = useState("");
+  const addInputRef = useRef<HTMLInputElement>(null);
   const highlightTimeouts = useRef<Map<string, ReturnType<typeof setTimeout>>>(
     new Map()
   );
@@ -75,6 +78,40 @@ export function CopilotCanvas({
     }, 1500);
     highlightTimeouts.current.set(itemId, timeout);
   }, []);
+
+  useEffect(() => {
+    if (addingToColumn) {
+      addInputRef.current?.focus();
+    }
+  }, [addingToColumn]);
+
+  const handleAddItem = (columnId: string) => {
+    const title = newItemTitle.trim();
+    if (!title) {
+      setAddingToColumn(null);
+      setNewItemTitle("");
+      return;
+    }
+    updateColumns((prev) =>
+      prev.map((col) =>
+        col.id === columnId
+          ? {
+              ...col,
+              items: [
+                ...col.items,
+                {
+                  id: `item-${Date.now()}`,
+                  title,
+                  priority: "medium" as const,
+                },
+              ],
+            }
+          : col
+      )
+    );
+    setAddingToColumn(null);
+    setNewItemTitle("");
+  };
 
   // Expose board state to Copilot
   useCopilotReadable({
@@ -442,21 +479,33 @@ export function CopilotCanvas({
                 </div>
               </div>
             ))}
-            <button
-              onClick={() => {
-                const title = prompt("New item title:");
-                if (title?.trim()) {
-                  updateColumns(prev => prev.map(col =>
-                    col.id === column.id
-                      ? { ...col, items: [...col.items, { id: `item-${Date.now()}`, title: title.trim(), priority: "medium" as const }] }
-                      : col
-                  ));
-                }
-              }}
-              className="flex w-full items-center justify-center gap-1 rounded-lg border border-dashed border-border/40 py-2 text-xs text-muted-foreground/60 transition-colors hover:border-border hover:text-muted-foreground"
-            >
-              <Plus className="size-3" /> Add item
-            </button>
+            {addingToColumn === column.id ? (
+              <div className="flex items-center gap-1">
+                <input
+                  ref={addInputRef}
+                  type="text"
+                  value={newItemTitle}
+                  onChange={(e) => setNewItemTitle(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleAddItem(column.id);
+                    if (e.key === "Escape") {
+                      setAddingToColumn(null);
+                      setNewItemTitle("");
+                    }
+                  }}
+                  onBlur={() => handleAddItem(column.id)}
+                  placeholder="Item title..."
+                  className="flex-1 rounded-md border border-border/60 bg-background px-2 py-1.5 text-xs outline-none focus:border-violet-500/50"
+                />
+              </div>
+            ) : (
+              <button
+                onClick={() => setAddingToColumn(column.id)}
+                className="flex w-full items-center justify-center gap-1 rounded-lg border border-dashed border-border/40 py-2 text-xs text-muted-foreground/60 transition-colors hover:border-border hover:text-muted-foreground"
+              >
+                <Plus className="size-3" /> Add item
+              </button>
+            )}
           </div>
         </div>
       ))}

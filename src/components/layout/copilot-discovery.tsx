@@ -64,8 +64,7 @@ export function CopilotDiscovery() {
       {
         name: "slug",
         type: "string",
-        description:
-          "The component slug. Available: copilot-table, copilot-form, copilot-canvas",
+        description: `The component slug. Available: ${components.map((c) => c.slug).join(", ")}`,
         required: true,
       },
     ],

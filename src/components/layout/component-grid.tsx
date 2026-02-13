@@ -5,7 +5,7 @@ import { Search, Grid3X3, Table, FormInput, Layout, MessageSquare, CalendarDays 
 import { Input } from "@/components/ui/input";
 import { components, categories } from "@/lib/components-data";
 import { ComponentCard } from "./component-card";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const iconMap: Record<string, React.ReactNode> = {
   Grid3X3: <Grid3X3 className="size-4" />,

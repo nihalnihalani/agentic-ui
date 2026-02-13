@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import {
   Sparkles,
   Eye,
@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { components } from "@/lib/components-data";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -161,15 +162,18 @@ const { handleRequest } =
   },
   {
     icon: ShieldCheck,
-    name: "Error Boundary",
+    name: "Graceful Degradation",
     description:
-      "A React error boundary wrapping CopilotKit so the app degrades gracefully when no API key is configured or the runtime is unreachable. Components remain fully functional without AI.",
+      "CopilotKit is configured so the app degrades gracefully when no API key is present or the runtime is unreachable. All components remain fully functional without AI -- the copilot features simply become unavailable.",
     usedIn: ["CopilotProvider"],
-    snippet: `<CopilotErrorBoundary fallback={<>{children}</>}>
-  <CopilotKit runtimeUrl="/api/copilotkit">
+    snippet: `<CopilotKit
+  runtimeUrl="/api/copilotkit"
+  showDevConsole={false}
+>
+  <CopilotSidebar defaultOpen={false}>
     {children}
-  </CopilotKit>
-</CopilotErrorBoundary>`,
+  </CopilotSidebar>
+</CopilotKit>`,
   },
   {
     icon: Search,
@@ -193,7 +197,7 @@ const { handleRequest } =
 ];
 
 const stats = [
-  { label: "AI Components", value: "12" },
+  { label: "AI Components", value: `${components.length}` },
   { label: "CopilotKit Actions", value: "60+" },
   { label: "TypeScript", value: "100%" },
   { label: "Design System", value: "shadcn/ui" },

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Copy, Check, Table, FormInput, Layout, MessageSquare, CalendarDays } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { ComponentMeta } from "@/types";

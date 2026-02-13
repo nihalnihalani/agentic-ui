@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useCopilotReadable, useCopilotAction } from "@copilotkit/react-core";
 import { User } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
 interface Employee {
   id: string;

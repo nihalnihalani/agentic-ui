@@ -166,7 +166,17 @@ function renderMarkdownToHtml(markdown: string): string {
   return htmlParts.join("\n");
 }
 
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 function applyInlineFormatting(text: string): string {
+  // Escape HTML entities first to prevent XSS
+  text = escapeHtml(text);
   // Bold: **text**
   text = text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   // Italic: *text*

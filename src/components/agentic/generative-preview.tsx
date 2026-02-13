@@ -9,11 +9,15 @@ import { CopilotCanvas } from "@/components/registry/copilot-canvas";
 import { CopilotChart } from "@/components/registry/copilot-chart";
 import { CopilotCalendar } from "@/components/registry/copilot-calendar";
 import { CopilotSearch } from "@/components/registry/copilot-search";
+import { CopilotChat } from "@/components/registry/copilot-chat";
+import { CopilotEditor } from "@/components/registry/copilot-editor";
+import { CopilotTimeline } from "@/components/registry/copilot-timeline";
+import { CopilotNotifications } from "@/components/registry/copilot-notifications";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeBlock } from "@/components/layout/code-block";
 import { X, Sparkles, AlertCircle } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
 type ComponentType = "form" | "table" | "canvas" | "chart" | "chat" | "dashboard" | "calendar" | "editor" | "timeline" | "notifications" | "search";
 
@@ -64,6 +68,18 @@ function generateCode(type: string, props: Record<string, unknown>): string {
   products={${JSON.stringify(props.products, null, 2)}}
 />`
         : `<CopilotSearch />`;
+    case "chat":
+      return `<CopilotChat />`;
+    case "editor":
+      return `<CopilotEditor />`;
+    case "timeline":
+      return props.initialMilestones
+        ? `<CopilotTimeline
+  initialMilestones={${JSON.stringify(props.initialMilestones, null, 2)}}
+/>`
+        : `<CopilotTimeline />`;
+    case "notifications":
+      return `<CopilotNotifications />`;
     default:
       return `{/* ${type} preview uses default props */}`;
   }
@@ -75,7 +91,7 @@ export function GenerativePreview() {
   useCopilotAction({
     name: "generateComponentPreview",
     description:
-      "Generate a live preview of a component based on user requirements. Use this when the user asks to create or show a component. Supported types: form, table, dashboard, canvas, chart, calendar, search. For dashboard/chart/calendar/search, config can be '{}' to use defaults.",
+      "Generate a live preview of a component based on user requirements. Use this when the user asks to create or show a component. Supported types: form, table, dashboard, canvas, chart, calendar, search, chat, editor, timeline, notifications. For dashboard/chart/calendar/search/chat/editor/timeline/notifications, config can be '{}' to use defaults.",
     parameters: [
       {
         name: "type",
@@ -161,6 +177,18 @@ export function GenerativePreview() {
             products={preview.props.products}
           />
         );
+      case "chat":
+        return <CopilotChat />;
+      case "editor":
+        return <CopilotEditor />;
+      case "timeline":
+        return (
+          <CopilotTimeline
+            initialMilestones={preview.props.initialMilestones}
+          />
+        );
+      case "notifications":
+        return <CopilotNotifications />;
       default:
         return (
           <div className="flex flex-col items-center justify-center gap-2 py-12 text-muted-foreground">
